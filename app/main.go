@@ -9,14 +9,15 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go-web-api/delivery/http"
+	"go-web-api/repository/psql"
+	"go-web-api/usecase"
 )
 
 func main() {
 	dsn := "postgres://postgres:@localhost:5432/test?sslmode=disable"
 	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
 
-	//db := bun.NewDB(sqldb, pgdialect.New())
-	_ = bun.NewDB(sqldb, pgdialect.New())
+	db := bun.NewDB(sqldb, pgdialect.New())
 
 	r := gin.Default()
 	/*
@@ -26,6 +27,8 @@ func main() {
 			})
 		})
 	*/
-	http.NewArticleHandler(r)
+	articleRepo := psql.NewArticleRepository(db)
+	articleUsecase := usecase.NewArticleUsecase(articleRepo)
+	http.NewArticleHandler(r, articleUsecase)
 	r.Run()
 }

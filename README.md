@@ -3,6 +3,17 @@
 https://medium.com/hackernoon/golang-clean-archithecture-efd6d7c43047
 
 ## Tech Stack
-- [ ] Gin Gonic
-- [ ] Bun (DB Client)
+- [x] Gin Gonic
+- [x] Bun (DB Client)
 - [ ] Swagger
+
+## TODO
+- [ ] Generator
+  - [ ] Domain
+    - [ ] Model
+    - [ ] Usecase Interface
+    - [ ] Repository Interface
+  - [ ] Handler
+  - [ ] Usecase
+  - [ ] Repository
+- [ ] Migration
